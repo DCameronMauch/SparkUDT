@@ -17,10 +17,12 @@ object UUIDExample {
     val uuid4: UUID = UUID.randomUUID()
 
     val ds1: Dataset[EventPlain] = Seq((1, uuid1), (2, uuid2), (3, uuid3), (4, uuid4)).toDF("id", "uuid").as[EventPlain]
+    ds1.printSchema()
     ds1.show(99, false)
     ds1.write.mode(SaveMode.Overwrite).parquet("uuid-plain")
 
     val ds2: Dataset[EventPlain] = spark.read.parquet("uuid-plain").as[EventPlain].orderBy($"id")
+    ds2.printSchema()
     ds2.show(99, false)
   }
 
@@ -37,10 +39,12 @@ object UUIDExample {
     val uuid4: UUID = tag[UserUUIDTag][UUID](UUID.randomUUID())
 
     val ds1: Dataset[EventTagged] = Seq((1, uuid1), (2, uuid2), (3, uuid3), (4, uuid4)).toDF("id", "uuid").as[EventTagged]
+    ds1.printSchema()
     ds1.show(99, false)
     ds1.write.mode(SaveMode.Overwrite).parquet("uuid-tagged")
 
     val ds2: Dataset[EventTagged] = spark.read.parquet("uuid-tagged").as[EventTagged].orderBy($"id")
+    ds2.printSchema()
     ds2.show(99, false)
   }
 }
