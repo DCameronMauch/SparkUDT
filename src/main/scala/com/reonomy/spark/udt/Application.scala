@@ -12,10 +12,10 @@ object Application{
     .getOrCreate()
 
   def main(args: Array[String]): Unit = {
-//    udt.registerAll()
+    udt.registerAll()
 
     UUIDExample.plain(spark)
-//    UUIDExample.tagged(spark)
-//    DayOfWeekExample.plain(spark)
+    // UUIDExample.tagged(spark)
+    DayOfWeekExample.plain(spark)
   }
 }
